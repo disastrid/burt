@@ -1,0 +1,141 @@
+#N canvas 0 22 788 435 10;
+#X obj 690 42 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 692 119 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 690 197 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 690 280 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 661 43 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 664 120 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 662 197 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 662 280 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 485 57 s loop1record;
+#X obj 485 28 sel 1;
+#X obj 584 28 sel 0;
+#X obj 585 57 s loop1play;
+#X obj 486 105 sel 1;
+#X obj 585 105 sel 0;
+#X obj 690 64 s loop1clear;
+#X obj 692 139 s loop2clear;
+#X obj 486 134 s loop2record;
+#X obj 586 134 s loop2play;
+#X obj 486 183 sel 1;
+#X obj 585 183 sel 0;
+#X obj 690 218 s loop3clear;
+#X obj 488 266 sel 1;
+#X obj 587 266 sel 0;
+#X obj 690 301 s loop4clear;
+#X obj 586 212 s loop3play;
+#X obj 486 212 s loop3record;
+#X obj 488 295 s loop4record;
+#X obj 588 295 s loop4play;
+#N canvas 67 130 676 480 high01 1;
+#X obj 25 271 outlet~;
+#X obj 21 13 adc~ 1 2 3 4;
+#X obj 27 242 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 38 61 send~ high01_audio;
+#X obj 159 61 send~ high01_x;
+#X obj 253 61 send~ high01_y;
+#X obj 347 61 send~ high01_z;
+#X obj 507 79 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 509 126 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 511 173 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 508 228 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 507 42 r loop1play;
+#X obj 582 42 r loop1record;
+#X obj 457 77 sel 0;
+#X obj 457 100 sel 1;
+#X msg 409 101 set 0;
+#N canvas 1 208 570 369 recordPatch01 0;
+#X obj 27 22 inlet;
+#X obj 79 24 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 79 57 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
+;
+#X obj 198 33 receive~ high01_audio;
+#X obj 198 90 record~ high01_audio_buffer01;
+#X obj 383 31 receive~ hgih01_domAxis;
+#X obj 383 90 record~ high01_domAxis_buffer01;
+#X obj 71 112 timer;
+#X floatatom 71 135 5 0 0 0 - - -;
+#X msg 71 158 crop 0 \$1;
+#X obj 54 89 sel 1;
+#X obj 99 88 sel 0;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 2 0 6 0;
+#X connect 2 0 10 0;
+#X connect 2 0 11 0;
+#X connect 3 0 4 0;
+#X connect 5 0 6 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 10 0 7 0;
+#X connect 11 0 7 1;
+#X restore 405 139 pd recordPatch01;
+#X obj 94 169 array;
+#X connect 1 0 3 0;
+#X connect 1 1 4 0;
+#X connect 1 2 5 0;
+#X connect 1 3 6 0;
+#X connect 2 0 0 0;
+#X connect 7 0 13 0;
+#X connect 7 0 14 0;
+#X connect 11 0 7 0;
+#X connect 12 0 7 0;
+#X connect 13 0 15 0;
+#X restore 11 35 pd high01;
+#N canvas 90 295 450 300 high02 0;
+#X restore 73 35 pd high02;
+#N canvas 230 166 450 300 high03 0;
+#X restore 135 35 pd high03;
+#N canvas 230 153 450 300 high04 0;
+#X restore 197 35 pd high04;
+#N canvas 121 142 450 300 mid01 0;
+#X restore 11 58 pd mid01;
+#N canvas 148 285 450 300 mid02 0;
+#X restore 67 58 pd mid02;
+#N canvas 211 132 450 300 mid03 0;
+#X restore 122 58 pd mid03;
+#N canvas 368 260 450 300 mid04 0;
+#X restore 177 58 pd mid04;
+#N canvas 286 157 450 300 mid05 0;
+#X restore 232 58 pd mid05;
+#N canvas 103 142 450 300 low01 0;
+#X restore 11 80 pd low01;
+#N canvas 189 134 450 300 low02 0;
+#X restore 67 80 pd low02;
+#N canvas 208 132 450 300 low03 0;
+#X restore 123 80 pd low03;
+#X connect 0 0 14 0;
+#X connect 1 0 15 0;
+#X connect 2 0 20 0;
+#X connect 3 0 23 0;
+#X connect 4 0 9 0;
+#X connect 4 0 10 0;
+#X connect 5 0 12 0;
+#X connect 5 0 13 0;
+#X connect 6 0 19 0;
+#X connect 6 0 18 0;
+#X connect 7 0 22 0;
+#X connect 7 0 21 0;
+#X connect 9 0 8 0;
+#X connect 10 0 11 0;
+#X connect 12 0 16 0;
+#X connect 13 0 17 0;
+#X connect 18 0 25 0;
+#X connect 19 0 24 0;
+#X connect 21 0 26 0;
+#X connect 22 0 27 0;
